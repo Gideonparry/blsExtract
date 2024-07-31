@@ -3,7 +3,7 @@
     "path": "C:/Users/Owner/github/packages/blsExtract/R/hello.R",
     "project_path": "R/hello.R",
     "type": "r_source",
-    "hash": "3920630657",
+    "hash": "2297789690",
     "contents": "",
     "dirty": false,
     "created": 1722441110713.0,
@@ -11,14 +11,16 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "35,35",
+        "scrollLine": "18"
     },
     "folds": "",
-    "lastKnownWriteTime": 1722441104,
+    "lastKnownWriteTime": 1722445208,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1722441104,
+    "last_content_update": 1722445208832,
     "read_only": false,
     "read_only_alternatives": []
 }
