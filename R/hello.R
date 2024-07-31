@@ -1,17 +1,15 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
+#' Returns and saves file for BLS data of current month for inds
+#'
+#' Takes year for BLS data and returns the values of the different groups for
+#' the BLS employment series file. Requires blsAPI and rjson packages
+#'
+#' @param file the file to return winter_wind from
+#' @param year a string for the year to obtain the value
+#' @param var2 2nd wind variable to use
+#'
+#' @importFrom blsAPI blsAPI
+#' @importFrom rjson fromJSON
+#' @export
 
 blsExtract <- function(year, file_path) {
   ## One or More Series, Specifying Years
