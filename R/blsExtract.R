@@ -11,8 +11,15 @@
 #' @importFrom rjson fromJSON
 #' @export
 
-blsExtract <- function(year, file_path) {
+blsExtract <- function(year, file_path = NULL, create_csv = TRUE) {
   ## One or More Series, Specifying Years
+  if(create_csv){
+    if(!(dir.exists(file.path(paste(file_path,
+                                         "/", sep = ""))))){
+      stop("Enter a valid file path or set create_csv = FALSE")
+    }
+
+  }
   payload <- list("seriesid"=c("CES3200000001","CES3231100001", "CES3232900001",
                                "CES3231300001", "CES3231400001", "CES3231500001",
                                "CES3232200001", "CES3232300001", "CES3232400001",
@@ -23,6 +30,9 @@ blsExtract <- function(year, file_path) {
                                "CES3133900001"),
                   "startyear" = year, "endyear" = year)
   response <- blsAPI::blsAPI(payload)
+  if(grepl("No Data Available for Series", response)){
+    stop("Please enter a valid year containing data")
+  }
   json <- rjson::fromJSON(response)
 
 
@@ -30,9 +40,11 @@ blsExtract <- function(year, file_path) {
   for (i in 1:22){
     values[i] <- as.numeric(json$Results$series[[i]]$data[[1]]$value)
   }
-  vals_dat <- as.data.frame(matrix(values, 2, 11, byrow = TRUE)[2:1,])
-  rownames(vals_dat) = c("dg", "ndg")
-  write.csv(vals_dat, paste(file_path, "new_vals.csv", sep = "/"))
-  vals_dat
+  vals_data <- as.data.frame(matrix(values, 2, 11, byrow = TRUE)[2:1,])
+  rownames(vals_data) = c("dg", "ndg")
+  if(create_csv){
+    write.csv(vals_data, paste(file_path, "new_vals.csv", sep = "/"))
+  }
+  vals_data
 
 }
