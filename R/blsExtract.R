@@ -11,11 +11,11 @@
 #' @importFrom rjson fromJSON
 #' @export
 
-blsExtract <- function(year, file_path = NULL, create_csv = TRUE) {
+blsExtract <- function(year, file_path = "INVALID FILE PATH",
+                       create_csv = TRUE) {
   ## One or More Series, Specifying Years
   if(create_csv){
-    if(!(dir.exists(file.path(paste(file_path,
-                                         "/", sep = ""))))){
+    if(!(dir.exists(file.path(file_path)))){
       stop("Enter a valid file path or set create_csv = FALSE")
     }
 

@@ -4,7 +4,7 @@
 \alias{blsExtract}
 \title{Returns and saves file for BLS data of current month for inds}
 \usage{
-blsExtract(year, file_path = NULL, create_csv = TRUE)
+blsExtract(year, file_path = "INVALID FILE PATH", create_csv = TRUE)
 }
 \arguments{
 \item{year}{a string for the year to obtain the value}
