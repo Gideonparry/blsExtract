@@ -3,15 +3,17 @@
 #' Takes year for BLS data and returns the values of the different groups for
 #' the BLS employment series file. Requires blsAPI and rjson packages
 #'
-#' @param file the file to return winter_wind from
-#' @param year a string for the year to obtain the value
-#' @param var2 2nd wind variable to use
+#' @param year the year to obtain most recent monthly employment data from
+#' @param file_path the file path to save the csv file to
+#' @param file_name The name of the csv file to save
+#' @param create_csv TRUE to create a CSV file, FALSE to not create one
 #'
 #' @importFrom blsAPI blsAPI
 #' @importFrom rjson fromJSON
 #' @export
 
-blsExtract <- function(year, file_path = "INVALID FILE PATH",
+emplSeries <- function(year, file_path = "INVALID FILE PATH",
+                       file_name = "new_vals",
                        create_csv = TRUE) {
   ## One or More Series, Specifying Years
   if(create_csv){
@@ -43,7 +45,8 @@ blsExtract <- function(year, file_path = "INVALID FILE PATH",
   vals_data <- as.data.frame(matrix(values, 2, 11, byrow = TRUE)[2:1,])
   rownames(vals_data) = c("dg", "ndg")
   if(create_csv){
-    write.csv(vals_data, paste(file_path, "new_vals.csv", sep = "/"))
+    write.csv(vals_data, paste(file_path, paste(file_name, "csv", sep = "."),
+                               sep = "/"))
   }
   vals_data
 
