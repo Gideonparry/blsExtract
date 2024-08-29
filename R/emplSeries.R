@@ -22,14 +22,17 @@ emplSeries <- function(year, file_path = "INVALID FILE PATH",
     }
 
   }
-  payload <- list("seriesid"=c("CES3200000001","CES3231100001", "CES3232900001",
-                               "CES3231300001", "CES3231400001", "CES3231500001",
-                               "CES3232200001", "CES3232300001", "CES3232400001",
-                               "CES3232500001", "CES3232600001", "CES3100000001",
-                               "CES3132100001", "CES3132700001", "CES3133100001",
-                               "CES3133200001", "CES3133300001", "CES3133400001",
-                               "CES3133500001", "CES3133600001", "CES3133700001",
-                               "CES3133900001"),
+  payload <- list("seriesid" = c("CES3200000001","CES3231100001",
+                                 "CES3232900001", "CES3231300001",
+                                 "CES3231400001", "CES3231500001",
+                                 "CES3232200001", "CES3232300001",
+                                 "CES3232400001", "CES3232500001",
+                                 "CES3232600001", "CES3100000001",
+                                 "CES3132100001", "CES3132700001",
+                                 "CES3133100001", "CES3133200001",
+                                 "CES3133300001", "CES3133400001",
+                                 "CES3133500001", "CES3133600001",
+                                 "CES3133700001", "CES3133900001"),
                   "startyear" = year, "endyear" = year)
   response <- blsAPI::blsAPI(payload)
   if(grepl("No Data Available for Series", response)){
