@@ -7,7 +7,7 @@
 emplSeries(
   year,
   file_path = "INVALID FILE PATH",
-  file_name = "new_vals",
+  num_months = 1,
   create_csv = TRUE
 )
 }
@@ -16,9 +16,9 @@ emplSeries(
 
 \item{file_path}{the file path to save the csv file to}
 
-\item{file_name}{The name of the csv file to save}
-
 \item{create_csv}{TRUE to create a CSV file, FALSE to not create one}
+
+\item{file_name}{The name of the csv file to save}
 }
 \description{
 Takes year for BLS data and returns the values of the different groups for

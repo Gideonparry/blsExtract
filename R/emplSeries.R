@@ -13,7 +13,7 @@
 #' @export
 
 emplSeries <- function(year, file_path = "INVALID FILE PATH",
-                       file_name = "new_vals",
+                       num_months = 1,
                        create_csv = TRUE) {
   ## One or More Series, Specifying Years
   if(create_csv){
@@ -40,17 +40,32 @@ emplSeries <- function(year, file_path = "INVALID FILE PATH",
   }
   json <- rjson::fromJSON(response)
 
-
+  ## empty matrix to store all the values
   values <- c()
+  ## For each of the 22 columns, we grab the specified months of data
   for (i in 1:22){
-    values[i] <- as.numeric(json$Results$series[[i]]$data[[1]]$value)
+    onevals <- c()
+    for (j in 1:num_months){
+      onevals[j] <- as.numeric(json$Results$series[[i]]$data[[j]]$value)
+    }
+    val1 <- num_months*(i-1) + 1
+    valn <- num_months*i
+    values[val1:valn] <- onevals[num_months:1]
   }
-  vals_data <- as.data.frame(matrix(values, 2, 11, byrow = TRUE)[2:1,])
-  rownames(vals_data) = c("dg", "ndg")
+
+  ## Order was weird, reordering columns here
+  vals_mat <- matrix(values, num_months, 22, byrow = FALSE)[,c(12:22, 1:11)]
+
   if(create_csv){
-    write.csv(vals_data, paste(file_path, paste(file_name, "csv", sep = "."),
+    vals_dat1 = vals_mat[,1:11]
+    write.csv(vals_dat1, paste(file_path, "empl_dg.csv",
                                sep = "/"))
+
+    vals_dat2 = vals_mat[,12:22]
+    write.csv(vals_dat2, paste(file_path, "empl_ndg.csv",
+                               sep = "/"))
+
   }
-  vals_data
+  vals_mat
 
 }
