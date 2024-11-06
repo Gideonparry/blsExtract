@@ -5,7 +5,7 @@
 #'
 #' @param year the year to obtain most recent monthly employment data from
 #' @param file_path the file path to save the csv file to
-#' @param file_name The name of the csv file to save
+#' @param num_months The number of months to go back
 #' @param create_csv TRUE to create a CSV file, FALSE to not create one
 #'
 #' @importFrom blsAPI blsAPI
