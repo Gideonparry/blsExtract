@@ -57,13 +57,28 @@ emplSeries <- function(year, file_path = "INVALID FILE PATH",
   vals_mat <- matrix(values, num_months, 22, byrow = FALSE)[,c(12:22, 1:11)]
 
   if(create_csv){
-    vals_dat1 = vals_mat[,1:11]
-    write.csv(vals_dat1, paste(file_path, "empl_dg.csv",
-                               sep = "/"))
+    if(num_months > 1){
+      vals_dat1 = vals_mat[,1:11]
+      write.csv(vals_dat1, paste(file_path, "empl_dg.csv",
+                                 sep = "/"))
 
-    vals_dat2 = vals_mat[,12:22]
-    write.csv(vals_dat2, paste(file_path, "empl_ndg.csv",
-                               sep = "/"))
+      vals_dat2 = vals_mat[,12:22]
+      write.csv(vals_dat2, paste(file_path, "empl_ndg.csv",
+                                 sep = "/"))
+
+    }
+
+    if(num_months == 1){
+      vals_dat1 = vals_mat[1:11]
+      write.csv(t(vals_dat1), paste(file_path, "empl_dg.csv",
+                                 sep = "/"))
+
+      vals_dat2 = vals_mat[12:22]
+      write.csv(t(vals_dat2), paste(file_path, "empl_ndg.csv",
+                                 sep = "/"))
+
+    }
+
 
   }
   vals_mat
